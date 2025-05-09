@@ -20,7 +20,7 @@ class UserService implements DataService<User, UserDTO> {
     }
   }
 
-  async deleteOne(id: string): Promise<User | undefined | null> {
+  async deleteOne({ id }: { id: string }): Promise<User | undefined | null> {
     try {
       return UserModel.findByIdAndDelete(id);
     } catch (error) {
@@ -28,7 +28,7 @@ class UserService implements DataService<User, UserDTO> {
     }
   }
 
-  async getAll(args?: Record<string, unknown>): Promise<User[] | undefined> {
+  async getAll(): Promise<User[] | undefined> {
     try {
       return UserModel.find({}, { login: 1 });
     } catch (error) {
@@ -44,7 +44,15 @@ class UserService implements DataService<User, UserDTO> {
     }
   }
 
-  async updateOne(id: string, data: Partial<UserDTO>): Promise<User | undefined | null> {
+  async getOneByLogin({ login }: { login: string }): Promise<User | undefined | null> {
+    try {
+      return UserModel.findOne({ login });
+    } catch (error) {
+      loggerService.appLogger(error, LogLevel.error);
+    }
+  }
+
+  async updateOne(data: Partial<UserDTO>, { id }: { id: string }): Promise<User | undefined | null> {
     try {
       dtoCleanUp(data);
       return UserModel.findByIdAndUpdate(

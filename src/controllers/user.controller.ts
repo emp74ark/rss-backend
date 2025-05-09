@@ -18,7 +18,7 @@ class UserController implements RouteController {
   async deleteOne(req: Request, res: Response): Promise<void> {
     try {
       const id = req.params.id;
-      const data = await userService.deleteOne(id);
+      const data = await userService.deleteOne({ id });
       res.status(200).json(data);
     } catch (error) {
       exceptionController.httpException(res, error);
@@ -48,7 +48,7 @@ class UserController implements RouteController {
     try {
       const id = req.params.id;
       const user = req.body;
-      const data = await userService.updateOne(id, user);
+      const data = await userService.updateOne(user, { id });
       res.status(200).json(data);
     } catch (error) {
       exceptionController.httpException(res, error);

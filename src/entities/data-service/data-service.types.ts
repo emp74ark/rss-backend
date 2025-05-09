@@ -3,9 +3,9 @@ export interface DataService<T, D> {
 
   getOne(args: Record<string, unknown>): Promise<T | undefined | null>;
 
-  addOne(data: D): Promise<T | undefined>;
+  addOne(data: D, args?: Record<string, unknown>): Promise<T | undefined>;
 
-  updateOne(id: string, data: Partial<D>): Promise<T | undefined | null>;
+  updateOne(data: Partial<D>, args: Record<string, unknown>): Promise<T | undefined | null>;
 
-  deleteOne(id: string): Promise<T | undefined | null>;
+  deleteOne(args: Record<string, unknown>): Promise<T | undefined | null>;
 }

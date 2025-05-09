@@ -1,0 +1,48 @@
+{
+  "name": "rss-backend",
+  "version": "1.0.0",
+  "description": "rss",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "npm run build && node dist/index.js",
+    "build": "rm -rf ./dist && npx tsc"
+  },
+  "keywords": [
+    "keys"
+  ],
+  "author": "emp74ark",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.15",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.26.0",
+    "express": "^5.1.0",
+    "globals": "^16.1.0",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.0"
+  },
+  "engines": {
+    "pnpm": ">=8.0.0"
+  },
+  "dependencies": {
+    "mongoose": "^8.14.1",
+    "pino": "^9.6.0",
+    "pino-http": "^10.4.0",
+    "pino-pretty": "^13.0.0",
+    "rss-parser": "^3.13.0",
+    "zod": "^3.24.4"
+  },
+  "directories": {
+    "doc": "doc"
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
+}

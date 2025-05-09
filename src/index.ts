@@ -1,7 +1,8 @@
 import express, { json } from 'express';
 import cors from 'cors';
+import session from 'express-session';
 import { addRoutes } from './routes/routes.ts';
-import { PORT } from './entities/base/base.constants.js';
+import { AUTH_SECRET, PORT } from './entities/base/base.constants.js';
 import { loggerService } from './services/logger.service.ts';
 import { LogLevel } from './entities/base/base.enums.ts';
 import { dbConnection } from './db/dbConnection.js';
@@ -17,6 +18,18 @@ server
   .on('error', (err) => {
     loggerService.appLogger(err, LogLevel.error);
   });
+
+server.use(
+  session({
+    secret: AUTH_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+    },
+    name: 'rss',
+  }),
+);
 
 server.use(cors());
 

@@ -2,9 +2,12 @@ import { Application } from 'express';
 import healthRoutes from './health.routes.ts';
 import rssRoutes from './rss.routes.ts';
 import userRoutes from './user.routes.ts';
+import authRoutes from './auth.routes.ts';
+import { authController } from '../controllers/auth.controller.js';
 
 export const addRoutes = (app: Application) => {
   app.use('/health', healthRoutes);
-  app.use('/user', userRoutes);
+  app.use('/auth', authRoutes);
+  app.use('/user', authController.validate, userRoutes);
   app.use('/rss', rssRoutes);
 };

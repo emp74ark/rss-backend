@@ -1,0 +1,18 @@
+### AUTH
+
+# @no-log
+POST http://localhost:3500/auth/login
+Content-Type: application/json
+
+{
+  "login": "first",
+  "password": "password"
+}
+
+###
+
+# @no-log
+GET http://localhost:3500/auth/logout
+Accept: application/json
+
+###

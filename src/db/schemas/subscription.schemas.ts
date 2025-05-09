@@ -52,7 +52,7 @@ const SubscriptionItemSchema = new Schema({
 });
 
 export const SubscriptionSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
@@ -63,6 +63,7 @@ export const SubscriptionSchema = new Schema({
   },
   items: {
     type: [SubscriptionItemSchema],
+    default: [],
   },
   lastUpdate: {
     type: Date,

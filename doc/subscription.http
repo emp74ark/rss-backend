@@ -1,0 +1,42 @@
+### SUBSCRIPTION
+
+# @no-log
+POST http://localhost:3500/subscription
+Content-Type: application/json
+
+{
+  "title": "Habr JS",
+  "description": "Habs JavaScript",
+  "link": "http://habrahabr.ru/rss/blogs/javascript"
+}
+
+###
+
+# @no-log
+GET http://localhost:3500/subscription
+Accept: application/json
+
+###
+
+# @no-log
+GET http://localhost:3500/subscription/681e5efd902047b638c6a30b
+Accept: application/json
+
+###
+
+# @no-log
+PATCH http://localhost:3500/subscription/681e5f2c902047b638c6a314
+Content-Type: application/json
+
+{
+  "description": "Habaaaa JavaScript"
+}
+
+###
+
+
+# @no-log
+DELETE http://localhost:3500/subscription/681e5efd902047b638c6a30b
+Content-Type: application/json
+
+###

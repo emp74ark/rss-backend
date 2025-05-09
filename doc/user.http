@@ -1,0 +1,41 @@
+### USERS
+
+# @no-log
+POST http://localhost:3500/user
+Content-Type: application/json
+
+{
+  "login": "first",
+  "password": "password"
+}
+
+###
+
+# @no-log
+GET http://localhost:3500/user
+Accept: application/json
+
+###
+
+# @no-log
+GET http://localhost:3500/user/681e2a399a192ebbfb480dc8
+Accept: application/json
+
+###
+
+# @no-log
+PATCH http://localhost:3500/user/681e2a399a192ebbfb480dc8
+Content-Type: application/json
+
+{
+  "password": "pwd"
+}
+
+###
+
+
+# @no-log
+DELETE http://localhost:3500/user/681e2a399a192ebbfb480dc8
+Content-Type: application/json
+
+###

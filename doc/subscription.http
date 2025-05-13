@@ -5,9 +5,9 @@ POST http://localhost:3500/subscription
 Content-Type: application/json
 
 {
-  "title": "Habr JS",
-  "description": "Habs JavaScript",
-  "link": "http://habrahabr.ru/rss/blogs/javascript"
+  "title": "Reform",
+  "description": "Reform news",
+  "link": "https://reform.news/feed"
 }
 
 ###
@@ -19,7 +19,7 @@ Accept: application/json
 ###
 
 # @no-log
-GET http://localhost:3500/subscription/681e5efd902047b638c6a30b
+GET http://localhost:3500/subscription/68232353faa64fae67387185
 Accept: application/json
 
 ###

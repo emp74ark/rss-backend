@@ -4,6 +4,8 @@ import { SubscriptionModel, UserModel } from '../db/dbModels.js';
 import { loggerService } from './logger.service.js';
 import { LogLevel } from '../entities/base/base.enums.js';
 import { dtoCleanUp } from '../lib/dtoCleanUp.js';
+import { crawlerService } from './crawler.service.js';
+import mongoose from 'mongoose';
 
 class SubscriptionService implements DataService<Subscription, SubscriptionDTO> {
   async getAll({ userId }: { userId: string }): Promise<Subscription[] | undefined> {
@@ -31,7 +33,27 @@ class SubscriptionService implements DataService<Subscription, SubscriptionDTO> 
 
   async getOne({ id }: { id: string }): Promise<Subscription | null | undefined> {
     try {
-      return SubscriptionModel.findById(id);
+      let objectId: mongoose.Types.ObjectId;
+
+      try {
+        objectId = new mongoose.Types.ObjectId(id);
+      } catch {
+        loggerService.appLogger(`ID ${id} is not a valid`, LogLevel.error);
+        return;
+      }
+
+      const result = await SubscriptionModel.aggregate([
+        { $match: { _id: objectId } },
+        { $lookup: { from: 'articles', localField: 'articles', foreignField: '_id', as: 'items' } },
+        { $set: { articles: '$items' } },
+        { $unset: 'items' },
+      ]);
+
+      if (!result.length) {
+        return;
+      }
+
+      return result[0] as unknown as Subscription;
     } catch (error) {
       loggerService.appLogger(error, LogLevel.error);
     }
@@ -54,6 +76,8 @@ class SubscriptionService implements DataService<Subscription, SubscriptionDTO> 
       await UserModel.findByIdAndUpdate(userId, {
         $push: { subscriptions: sub },
       });
+
+      await crawlerService.updateSubscription(sub);
 
       return sub as unknown as Subscription;
       // FIXME: check the type assertion

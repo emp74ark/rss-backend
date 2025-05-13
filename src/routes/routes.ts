@@ -1,6 +1,5 @@
 import { Application } from 'express';
 import healthRoutes from './health.routes.ts';
-import rssRoutes from './rss.routes.ts';
 import userRoutes from './user.routes.ts';
 import authRoutes from './auth.routes.ts';
 import subscriptionRoutes from './subscription.routes.ts';
@@ -10,6 +9,5 @@ export const addRoutes = (app: Application) => {
   app.use('/health', healthRoutes);
   app.use('/auth', authRoutes);
   app.use('/user', authController.validate, userRoutes);
-  app.use('/rss', rssRoutes);
   app.use('/subscription', authController.validate, subscriptionRoutes);
 };

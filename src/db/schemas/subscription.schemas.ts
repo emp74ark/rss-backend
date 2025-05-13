@@ -16,41 +16,6 @@ const SubscriptionSettingsSchema = new Schema(
   },
 );
 
-const SubscriptionItemSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  creator: String,
-  link: {
-    type: String,
-    required: true,
-  },
-  pubDate: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  contentSnippet: String,
-  guid: String,
-  categories: [String],
-  isoDate: {
-    type: Date,
-    required: true,
-  },
-  tags: [String],
-  read: {
-    type: Boolean,
-    default: false,
-  },
-  fullText: {
-    type: String,
-  },
-});
-
 export const SubscriptionSchema = new Schema({
   title: {
     type: String,
@@ -61,14 +26,22 @@ export const SubscriptionSchema = new Schema({
     type: String,
     required: true,
   },
-  items: {
-    type: [SubscriptionItemSchema],
-    default: [],
-  },
+  articles: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'articles',
+    },
+  ],
   lastUpdate: {
     type: Date,
   },
-  settings: SubscriptionSettingsSchema,
+  settings: {
+    type: SubscriptionSettingsSchema,
+    default: {
+      enabled: true,
+      loadFullText: false,
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,

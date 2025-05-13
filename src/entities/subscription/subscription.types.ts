@@ -1,29 +1,21 @@
-import { RssItem } from '../rss/rss.types.js';
-import { MongoObjectType } from '../base/base.types.js';
+import { MongoObjectType, MongoOptionalType } from '../base/base.types.js';
 
 export interface SubscriptionSettings {
-  enable?: boolean;
-  loadFullText?: boolean;
-}
-
-export interface SubscriptionItem extends RssItem {
-  _id: MongoObjectType;
-  tags: string[];
-  read: boolean;
-  fullText?: string;
+  enable?: MongoOptionalType<boolean>;
+  loadFullText?: MongoOptionalType<boolean>;
 }
 
 export interface SubscriptionDTO {
   title: string;
-  description?: string;
+  description?: MongoOptionalType<string>;
   link: string;
   settings: SubscriptionSettings;
-  lastUpdate?: Date;
+  lastUpdate?: MongoOptionalType<Date>;
 }
 
 export interface Subscription extends SubscriptionDTO {
   _id: MongoObjectType;
-  items: SubscriptionItem[];
+  articles: MongoObjectType[];
   createdAt: Date;
   modifiedAt: Date;
 }

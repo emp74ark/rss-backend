@@ -1,6 +1,8 @@
+import { MongoOptionalType } from '../base/base.types.js';
+
 export interface RssItem {
   title: string;
-  creator?: string;
+  creator?: MongoOptionalType<string>;
   link: string;
   pubDate: string;
   content: string;
@@ -15,5 +17,5 @@ export interface RssSource {
   description: string;
   link: string;
   language: string;
-  items: string[];
+  items: RssItem[];
 }

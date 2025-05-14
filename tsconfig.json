@@ -13,7 +13,6 @@
     "noImplicitAny": true,
     "useUnknownInCatchVariables": false,
     "inlineSourceMap": true,
-    "allowImportingTsExtensions": true,
     "skipLibCheck": true
   },
   "ts-node": {

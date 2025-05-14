@@ -24,7 +24,7 @@ class SubscriptionService implements DataService<Subscription, SubscriptionDTO> 
         }),
       );
 
-      return subscriptions as unknown as Subscription[];
+      return subscriptions.filter(Boolean) as unknown as Subscription[];
       // FIXME: check the type assertion
     } catch (error) {
       loggerService.appLogger(error, LogLevel.error);

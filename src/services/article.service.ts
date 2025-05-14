@@ -51,7 +51,7 @@ class ArticleService implements DataService<Article, ArticleDTO> {
   async updateOne(data: Partial<ArticleDTO>, { id }: { id: string }): Promise<Article | undefined | null> {
     try {
       dtoCleanUp(data);
-      return ArticleModel.findByIdAndUpdate(id, data);
+      return ArticleModel.findByIdAndUpdate(id, data, { new: true });
     } catch (error) {
       loggerService.appLogger(error, LogLevel.error);
     }

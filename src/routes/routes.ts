@@ -9,7 +9,7 @@ import { authController } from '../controllers/auth.controller.js';
 export const addRoutes = (app: Application) => {
   app.use('/health', healthRoutes);
   app.use('/auth', authRoutes);
-  app.use('/user', authController.validate, userRoutes);
+  app.use('/user', userRoutes);
   app.use('/subscription', authController.validate, subscriptionRoutes);
   app.use('/article', authController.validate, articleRoutes);
 };

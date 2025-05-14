@@ -1,4 +1,0 @@
-### GET health status
-GET http://localhost:3500/health
-
-###

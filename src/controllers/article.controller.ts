@@ -27,7 +27,8 @@ class ArticleController implements RouteController {
 
   async getAll(req: Request, res: Response): Promise<void> {
     try {
-      const data = await articleService.getAll();
+      const tags = req.query.tags as string;
+      const data = await articleService.getAll({ tags });
       res.status(200).json(data);
     } catch (error) {
       exceptionController.httpException(res, error);
@@ -49,6 +50,16 @@ class ArticleController implements RouteController {
       const id = req.params.id;
       const article = req.body;
       const data = await articleService.updateOne(article, { id });
+      res.status(200).json(data);
+    } catch (error) {
+      exceptionController.httpException(res, error);
+    }
+  }
+
+  async updateMany(req: Request, res: Response): Promise<void> {
+    try {
+      const { ids, article } = req.body;
+      const data = await articleService.updateMany({ ids, data: article });
       res.status(200).json(data);
     } catch (error) {
       exceptionController.httpException(res, error);

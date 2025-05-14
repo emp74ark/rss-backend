@@ -19,7 +19,7 @@ Accept: application/json
 ###
 
 # @no-log
-GET http://localhost:3500/subscription/68232353faa64fae67387185
+GET http://localhost:3500/subscription/68232604546d3f3f3f491594
 Accept: application/json
 
 ###
@@ -36,7 +36,7 @@ Content-Type: application/json
 
 
 # @no-log
-DELETE http://localhost:3500/subscription/681e5efd902047b638c6a30b
+DELETE http://localhost:3500/subscription/6824d5a05f08abd8146c09bf
 Content-Type: application/json
 
 ###

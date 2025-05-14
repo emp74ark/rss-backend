@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { articleController } from '../controllers/asrticle.controller.js';
+import { articleController } from '../controllers/article.controller.js';
 
 const router = Router();
 
@@ -8,6 +8,8 @@ router.get('/', articleController.getAll);
 router.get('/:id', articleController.getOne);
 
 router.post('/', articleController.addOne);
+
+router.patch('/', articleController.updateMany);
 
 router.patch('/:id', articleController.updateOne);
 

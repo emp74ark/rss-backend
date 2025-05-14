@@ -31,7 +31,13 @@ class SubscriptionService implements DataService<Subscription, SubscriptionDTO> 
     }
   }
 
-  async getOne({ id }: { id: string }): Promise<Subscription | null | undefined> {
+  async getOne({
+    id,
+    filter,
+  }: {
+    id: string;
+    filter?: Record<string, string>;
+  }): Promise<Subscription | null | undefined> {
     try {
       let objectId: mongoose.Types.ObjectId;
 
@@ -42,10 +48,18 @@ class SubscriptionService implements DataService<Subscription, SubscriptionDTO> 
         return;
       }
 
+      let query: Record<string, unknown> | string;
+
+      if (filter?.unread && filter.unread === 'true') {
+        query = { $filter: { input: '$items', as: 'item', cond: { $eq: ['$$item.read', false] }}};
+      } else {
+        query = '$items'
+      }
+
       const result = await SubscriptionModel.aggregate([
         { $match: { _id: objectId } },
         { $lookup: { from: 'articles', localField: 'articles', foreignField: '_id', as: 'items' } },
-        { $set: { articles: '$items' } },
+        { $set: { articles: query } },
         { $unset: 'items' },
       ]);
 

@@ -1,14 +1,29 @@
 ### SUBSCRIPTION
 
 # @no-log
-GET http://localhost:3500/article
+GET http://localhost:3500/article?tags=fav
 Accept: application/json
 
 ###
 
 # @no-log
-GET http://localhost:3500/article/68232920ca1fee1b5ccf2832
+GET http://localhost:3500/article/6823239eec4574403444bdec
 Accept: application/json
+
+###
+
+# @no-log
+PATCH http://localhost:3500/article
+Content-Type: application/json
+
+{
+  "ids": [
+    "6823239eec4574403444bded"
+  ],
+  "article": {
+    "read": true
+  }
+}
 
 ###
 

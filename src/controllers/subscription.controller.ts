@@ -57,7 +57,8 @@ class SubscriptionController implements RouteController {
   async getOne(req: Request, res: Response): Promise<void> {
     try {
       const id = req.params.id;
-      const data = await subscriptionService.getOne({ id });
+      const filter = req.query as Record<string, string>;
+      const data = await subscriptionService.getOne({ id, filter });
       res.status(200).json(data);
     } catch (error) {
       exceptionController.httpException(res, error);

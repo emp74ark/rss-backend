@@ -4,6 +4,7 @@ import { loggerService } from './logger.service.js';
 import { LogLevel } from '../entities/base/base.enums.js';
 import { ArticleModel } from '../db/dbModels.js';
 import { dtoCleanUp } from '../lib/dtoCleanUp.js';
+import { MongoObjectType } from '../entities/base/base.types.js';
 
 class ArticleService implements DataService<Article, ArticleDTO> {
   async addOne(data: ArticleDTO, args?: Record<string, unknown>): Promise<Article | undefined> {
@@ -32,8 +33,11 @@ class ArticleService implements DataService<Article, ArticleDTO> {
     }
   }
 
-  async getAll(args?: Record<string, unknown>): Promise<Article[] | undefined> {
+  async getAll({ tags }: { tags?: string }): Promise<Article[] | undefined> {
     try {
+      if (tags) {
+        return ArticleModel.find({ tags: { $in: tags.split(',') } });
+      }
       return ArticleModel.find();
     } catch (error) {
       loggerService.appLogger(error, LogLevel.error);
@@ -52,6 +56,20 @@ class ArticleService implements DataService<Article, ArticleDTO> {
     try {
       dtoCleanUp(data);
       return ArticleModel.findByIdAndUpdate(id, data, { new: true });
+    } catch (error) {
+      loggerService.appLogger(error, LogLevel.error);
+    }
+  }
+
+  async updateMany({ ids, data }: { ids: MongoObjectType[]; data: Partial<ArticleDTO> }): Promise<
+    | {
+        acknowledged: boolean;
+        modifiedCount?: number;
+      }
+    | undefined
+  > {
+    try {
+      return await ArticleModel.updateMany({ _id: { $in: ids } }, data);
     } catch (error) {
       loggerService.appLogger(error, LogLevel.error);
     }

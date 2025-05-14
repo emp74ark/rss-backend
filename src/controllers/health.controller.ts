@@ -1,4 +1,4 @@
-import { exceptionController } from './exception.controller.ts';
+import { exceptionController } from './exception.controller.js';
 import { Request, Response } from 'express';
 
 class HealthController {

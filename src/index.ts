@@ -1,10 +1,10 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import session from 'express-session';
-import { addRoutes } from './routes/routes.ts';
+import { addRoutes } from './routes/routes.js';
 import { AUTH_SECRET, PORT } from './entities/base/base.constants.js';
-import { loggerService } from './services/logger.service.ts';
-import { LogLevel } from './entities/base/base.enums.ts';
+import { loggerService } from './services/logger.service.js';
+import { LogLevel } from './entities/base/base.enums.js';
 import { dbConnection } from './db/dbConnection.js';
 import { crawlerService } from './services/crawler.service.js';
 

@@ -1,6 +1,6 @@
 import { model } from 'mongoose';
-import { UserSchema } from './schemas/user.schemas.ts';
-import { SubscriptionSchema } from './schemas/subscription.schemas.ts';
+import { UserSchema } from './schemas/user.schemas.js';
+import { SubscriptionSchema } from './schemas/subscription.schemas.js';
 import { ArticleSchema } from './schemas/article.schemas.js';
 
 export const UserModel = model('user', UserSchema);

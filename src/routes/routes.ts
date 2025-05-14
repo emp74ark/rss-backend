@@ -1,8 +1,8 @@
 import { Application } from 'express';
-import healthRoutes from './health.routes.ts';
-import userRoutes from './user.routes.ts';
-import authRoutes from './auth.routes.ts';
-import subscriptionRoutes from './subscription.routes.ts';
+import healthRoutes from './health.routes.js';
+import userRoutes from './user.routes.js';
+import authRoutes from './auth.routes.js';
+import subscriptionRoutes from './subscription.routes.js';
 import articleRoutes from './article.routes.js';
 import { authController } from '../controllers/auth.controller.js';
 

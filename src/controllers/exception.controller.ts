@@ -1,6 +1,6 @@
 import { Response } from 'express';
-import { loggerService } from '../services/logger.service.ts';
-import { LogLevel } from '../entities/base/base.enums.ts';
+import { loggerService } from '../services/logger.service.js';
+import { LogLevel } from '../entities/base/base.enums.js';
 
 export class ExceptionController {
   httpException = (res: Response, e: unknown) => {
